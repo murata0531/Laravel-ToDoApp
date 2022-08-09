@@ -1,0 +1,42 @@
+name: Laravel_CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches: 
+      - main
+      - develop
+
+jobs:
+  app-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+   # dockerコンテナを起動
+    - name: docker-compose up
+      run: docker-compose up -d
+   
+    - name: Copy Environment File
+      run: docker-compose run -T app bash -c "cd app && cp .env.example .env"
+      
+    - name: Install Dependencies
+      run: docker-compose run -T app bash -c "cd app && composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist"
+      
+    - name: Generate key
+      run: docker-compose run -T app bash -c "cd app && php artisan key:generate"
+
+    ## dbの起動を待機
+    - name: Wait DB
+      run : docker-compose exec -T db bash -c "mysqladmin --wait --count 60 ping -proot || exit 1"
+
+    ## マイグレーション
+    - name: migration
+      run: docker-compose run -T app bash -c "cd app && php artisan migrate:fresh --seed"
+      
+    ## test実行
+    - name: Execute tests (Unit and Feature tests) via PHPUnit
+      run: docker-compose run -T app bash -c "cd app && ./vendor/bin/phpunit"

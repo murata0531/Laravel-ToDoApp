@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->comment('状態');
             $table->timestamps();
         });
     }

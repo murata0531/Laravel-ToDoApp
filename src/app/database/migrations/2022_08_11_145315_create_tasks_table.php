@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('name')->comment('タスク名');
-            $table->unsignedBigInteger('status_id')->comment('タスクの状態');
+            $table->text('description')->comment('詳細');
+            $table->unsignedBigInteger('status_id')->default(1)->comment('タスクの状態');
             $table->timestamps();
 
             $table->foreign('status_id')->references('id')->on('statuses');

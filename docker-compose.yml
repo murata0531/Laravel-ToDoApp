@@ -9,6 +9,16 @@ services:
   privileged: true
   tty: true
 
+#  npm:
+#   image: node:16
+#   container_name: npm
+#   volumes:
+#     - ./src:/var/www/html
+#   ports:
+#     - "3000:3000"
+#   working_dir: /var/www/html
+#   tty: true
+
  db:
   build: ./docker/db
   environment:

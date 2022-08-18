@@ -18,14 +18,14 @@
                             <textarea  id="description" cols="30" rows="10" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Enter Description" wire:model="description"></textarea>
                             @error('description') <span class="text-red-500">{{ $message }}</span>@enderror       
                         </div>
-                        <!-- <div class="mb-4">
+                        <div class="mb-4">
                             <label for="status_id" class="block text-gray-700 text-sm font-bold mb-2">状態</label>
                             <select  id="status_id" cols="30" rows="10" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" wire:model="status_id">
                                 @foreach ($statuses as $status)
                                 <option value="{{ $status->id }}">{{ $status->name }}
                                 @endforeach
                             </select>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">

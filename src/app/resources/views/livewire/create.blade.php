@@ -20,7 +20,8 @@
                         </div>
                         <div class="mb-4">
                             <label for="status_id" class="block text-gray-700 text-sm font-bold mb-2">状態</label>
-                            <select  id="status_id" cols="30" rows="10" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" wire:model="status_id">
+                            <select  id="status_id" cols="30" rows="10" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                name="status_id" wire:model="status_id" wire:change="onChange">
                                 @foreach ($statuses as $status)
                                 <option value="{{ $status->id }}">{{ $status->name }}
                                 @endforeach

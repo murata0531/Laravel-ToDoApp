@@ -8,7 +8,8 @@ use App\Models\Task;
 
 class Tasks extends Component
 {
-    public $tasks, $name, $description, $task_id,$statuses,$status_id;
+    public $tasks, $name, $description, $task_id,$statuses;
+    public $status_id = 1;
     public $isOpen=false;
 
     public function render()
@@ -16,6 +17,17 @@ class Tasks extends Component
         $this->statuses = Status::all();
         $this->tasks = Task::all();
         return view('livewire.tasks');
+    }
+
+    public function mount($status_id = 1) {
+
+        $this->status_id = $status_id;
+        $this->onChange();
+    }
+
+    public function onChange()
+    {
+        $status_id= intval($this->status_id);
     }
 
     public function create()
@@ -51,6 +63,7 @@ class Tasks extends Component
         Task::updateOrCreate(['id' => $this->task_id], [
             'name' => $this->name,
             'description' => $this->description,
+            'status_id' => $this->status_id
         ]);
         session()->flash('message', 
             $this->task_id ? 'Task Updated Successfully.' : 'Task Created Successfully.');
@@ -64,6 +77,7 @@ class Tasks extends Component
         $this->task_id = $task->id;
         $this->name = $task->name;
         $this->description = $task->description;
+        $this->stattus->id = $task->status_id;
         $this->openModal();
     }
 

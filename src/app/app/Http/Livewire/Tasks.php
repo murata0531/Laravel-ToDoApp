@@ -14,13 +14,14 @@ class Tasks extends Component
 
     public function render()
     {
-        $this->statuses = Status::all();
-        $this->tasks = Task::all();
+        $this->statuses = Status::with('tasks')->get();
+        $this->tasks = Task::with('statuses')->get();
+        
         return view('livewire.tasks');
     }
 
-    public function mount($status_id = 1) {
-
+    public function mount($status_id = 1)
+    {
         $this->status_id = $status_id;
         $this->onChange();
     }
@@ -65,8 +66,9 @@ class Tasks extends Component
             'description' => $this->description,
             'status_id' => $this->status_id
         ]);
+
         session()->flash('message', 
-            $this->task_id ? 'Task Updated Successfully.' : 'Task Created Successfully.');
+        $this->task_id ? 'Task Updated Successfully.' : 'Task Created Successfully.');
         $this->closeModal();
         $this->resetInputFields();
     }
@@ -77,7 +79,7 @@ class Tasks extends Component
         $this->task_id = $task->id;
         $this->name = $task->name;
         $this->description = $task->description;
-        $this->stattus->id = $task->status_id;
+        $this->stattus_id = $task->status_id;
         $this->openModal();
     }
 

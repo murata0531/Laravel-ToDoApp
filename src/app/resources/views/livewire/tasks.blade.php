@@ -25,6 +25,7 @@
                         <th class="px-4 py2 w-20">No.</th>
                         <th class="px-4 py-2">Name</th>
                         <th class="px-4 py-2">Desc</th>
+                        <th lass="px-4 py-2">Status</th>
                         <th class="px-4 py-4">Action</th>
                     </tr>
                 </thead>
@@ -34,6 +35,7 @@
                             <td class="border px-4 py-2">{{ $task->id }}</td>
                             <td class="border px-4 py-2">{{ $task->name }}</td>
                             <td class="border px-4 py-2">{{ $task->description }}</td>
+                            <td class="border px-4 py-2">{{ $task->statuses->name }}</td>
                             <td class="border px-4 py2">
                                 <button wire:click="edit({{ $task->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</button>
                                 <button wire:click="delete({{ $task->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Delete</button>

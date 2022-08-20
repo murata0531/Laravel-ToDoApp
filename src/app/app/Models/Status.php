@@ -11,6 +11,6 @@ class Status extends Model
     protected $guarded = [];
 
     public function tasks() {
-        return $this->hasOne('App\Models\Task');
+        return $this->hasMany('App\Models\Task');
     }
 }

@@ -8,6 +8,8 @@ Jetstream
 
 Livewire
 
+TailWind css
+
 MySQL 8.0
 
 PHP 8.0

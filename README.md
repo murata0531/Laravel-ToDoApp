@@ -2,7 +2,7 @@
 
 # 環境
 
-Laravel 8
+Laravel 9
 
 Jetstream
 
